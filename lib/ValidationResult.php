@@ -21,14 +21,30 @@ class ValidationResult
     /**
      * @var ErrorMessage[]
      */
-    private $messages;
+    private $messages = array();
 
     /**
      * @param ErrorMessage[] $errorMessages
      */
     public function __construct(array $errorMessages)
     {
-        $this->messages = $errorMessages;
+        $this->addErrors($errorMessages);
+    }
+
+    /**
+     * @param ErrorMessage[] $messages
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function addErrors(array $messages)
+    {
+        foreach ($messages as $message) {
+            if (false === $message instanceof ErrorMessage) {
+                throw new \InvalidArgumentException('Validation result only accepts ErrorMessage instances.');
+            }
+
+            $this->messages[] = $message;
+        }
     }
 
     /**

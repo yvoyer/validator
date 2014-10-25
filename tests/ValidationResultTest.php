@@ -39,5 +39,14 @@ class ValidationResultTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($result->hasErrors());
         $this->assertSame(array('message'), $result->getErrors());
     }
+
+    /**
+     * @expectedException        \InvalidArgumentException
+     * @expectedExceptionMessage Validation result only accepts ErrorMessage instances.
+     */
+    public function test_it_should_throw_exceptions_when_invalid_arguments()
+    {
+        new ValidationResult(array(new \stdClass()));
+    }
 }
  
