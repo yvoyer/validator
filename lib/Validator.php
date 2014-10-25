@@ -7,7 +7,7 @@
 
 namespace Star\Component\Validator;
 
-use Star\Component\Validator\Handler\ValidationNotificationHandler;
+use Star\Component\Validator\Handler\NotificationHandler;
 
 /**
  * Class Validator
@@ -19,10 +19,10 @@ use Star\Component\Validator\Handler\ValidationNotificationHandler;
 interface Validator
 {
     /**
-     * @param ValidationNotificationHandler $handler
+     * @param NotificationHandler $handler
      *
      * @return ValidationResult
      */
-    public function validate(ValidationNotificationHandler $handler);
+    public function validate(NotificationHandler $handler);
 }
  

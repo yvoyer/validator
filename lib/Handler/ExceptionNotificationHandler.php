@@ -18,7 +18,7 @@ use Star\Component\Validator\Message\ErrorMessage;
  *
  * @package Star\Component\Validator\Handler
  */
-class ExceptionNotificationHandler implements ValidationNotificationHandler
+class ExceptionNotificationHandler implements NotificationHandler
 {
     /**
      * @param ErrorMessage $message
@@ -33,6 +33,7 @@ class ExceptionNotificationHandler implements ValidationNotificationHandler
      */
     public function createResult()
     {
+        return new ValidationResult(array());
     }
 }
  

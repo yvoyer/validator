@@ -9,7 +9,7 @@ namespace Star\Component\Validator;
 
 use Star\Component\Validator\Handler\DeferredNotificationHandler;
 use Star\Component\Validator\Handler\ExceptionNotificationHandler;
-use Star\Component\Validator\Handler\ValidationNotificationHandler;
+use Star\Component\Validator\Handler\NotificationHandler;
 use Star\Component\Validator\Message\ObjectTraceMessage;
 use Star\Component\Validator\Message\StringMessage;
 
@@ -76,11 +76,11 @@ class SomeValidator implements Validator
     }
 
     /**
-     * @param ValidationNotificationHandler $handler
+     * @param NotificationHandler $handler
      *
      * @return ValidationResult
      */
-    public function validate(ValidationNotificationHandler $handler)
+    public function validate(NotificationHandler $handler)
     {
         $name = $this->object->getName();
         if (empty($name)) {
@@ -105,11 +105,11 @@ class SomeObject
     }
 
     /**
-     * @param ValidationNotificationHandler $handler
+     * @param NotificationHandler $handler
      *
      * @return ValidationResult
      */
-    public function validate(ValidationNotificationHandler $handler)
+    public function validate(NotificationHandler $handler)
     {
         $validator = new SomeValidator($this);
 

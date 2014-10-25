@@ -11,13 +11,13 @@ use Star\Component\Validator\Message\ErrorMessage;
 use Star\Component\Validator\ValidationResult;
 
 /**
- * Class ValidationNotificationHandler
+ * Class NotificationHandler
  *
  * @author  Yannick Voyer (http://github.com/yvoyer)
  *
  * @package Star\Component\Validator\Handler
  */
-interface ValidationNotificationHandler
+interface NotificationHandler
 {
     /**
      * @param ErrorMessage $message

@@ -35,7 +35,7 @@ class ObjectTraceMessage implements ErrorMessage
     public function __construct($object, ErrorMessage $message)
     {
         if (false === is_object($object)) {
-            throw new \InvalidArgumentException('The first parameter must be an object.');
+            throw new \InvalidArgumentException('The object argument must be an object.');
         }
 
         $this->object = $object;

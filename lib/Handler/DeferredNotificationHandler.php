@@ -17,7 +17,7 @@ use Star\Component\Validator\ValidationResult;
  *
  * @package Star\Component\Validator\Handler
  */
-class DeferredNotificationHandler implements ValidationNotificationHandler
+class DeferredNotificationHandler implements NotificationHandler
 {
     /**
      * @var ErrorMessage[]

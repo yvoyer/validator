@@ -31,11 +31,11 @@ In the following example, the `YourNonEmptyValidator` would make sure the name o
         }
 
         /**
-         * @param ValidationNotificationHandler $handler
+         * @param NotificationHandler $handler
          *
          * @return ValidationResult
          */
-        public function validate(ValidationNotificationHandler $handler)
+        public function validate(NotificationHandler $handler)
         {
             $name = $this->object->getName();
 
@@ -49,10 +49,10 @@ In the following example, the `YourNonEmptyValidator` would make sure the name o
 
 The validators will return a `ValidationResult` to determine whether any constraints have failed.
 
-ValidationNotificationHandler
+NotificationHandler
 -----------------------------
 
-The `ValidationNotificationHandler` are responsible to notify the user about an error.
+The `NotificationHandler` are responsible to notify the user about an error.
 
 The only supported strategy currently implemented are:
 
@@ -88,11 +88,11 @@ You will need to implement a validation method in which you will put all the val
     // SomeObject.php
     ...
     /**
-     * @param ValidationNotificationHandler $handler
+     * @param NotificationHandler $handler
      *
      * @return ValidationResult
      */
-    public function validate(ValidationNotificationHandler $handler)
+    public function validate(NotificationHandler $handler)
     {
         $validator = new YourNonEmptyValidator($this); // This is your custom validator implementing Validator interface
 
