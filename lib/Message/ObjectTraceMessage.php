@@ -7,6 +7,8 @@
 
 namespace Star\Component\Validator\Message;
 
+use Star\Component\Validator\Exception\InvalidArgumentException;
+
 /**
  * Class ObjectTraceMessage
  *
@@ -27,15 +29,15 @@ class ObjectTraceMessage implements ErrorMessage
     private $message;
 
     /**
-     * @param object       $object
+     * @param object $object
      * @param ErrorMessage $message
      *
-     * @throws \InvalidArgumentException
+     * @throws \Star\Component\Validator\Exception\InvalidArgumentException
      */
     public function __construct($object, ErrorMessage $message)
     {
         if (false === is_object($object)) {
-            throw new \InvalidArgumentException('The object argument must be an object.');
+            throw new InvalidArgumentException('The object argument must be an object.');
         }
 
         $this->object = $object;

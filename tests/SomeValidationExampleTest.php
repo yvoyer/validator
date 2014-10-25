@@ -35,17 +35,22 @@ class SomeValidationExampleTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_should_generate_errors()
     {
-        $result = $this->object->validate(new DeferredNotificationHandler());
+        $handler = new DeferredNotificationHandler();
+        $this->object->validate($handler);
 
+        $result = $handler->createResult();
         $this->assertTrue($result->hasErrors());
         $this->assertCount(1, $result->getErrors());
     }
 
     public function test_it_should_not_generate_errors()
     {
-        $this->object->setName('non-empty');
-        $result = $this->object->validate(new DeferredNotificationHandler());
+        $handler = new DeferredNotificationHandler();
 
+        $this->object->setName('non-empty');
+        $this->object->validate($handler);
+
+        $result = $handler->createResult();
         $this->assertFalse($result->hasErrors());
         $this->assertCount(0, $result->getErrors());
     }
@@ -77,8 +82,6 @@ class SomeValidator implements Validator
 
     /**
      * @param NotificationHandler $handler
-     *
-     * @return ValidationResult
      */
     public function validate(NotificationHandler $handler)
     {
@@ -87,8 +90,6 @@ class SomeValidator implements Validator
             $message = new StringMessage('Name cannot be empty.');
             $handler->notifyError(new ObjectTraceMessage($this->object, $message));
         }
-
-        return $handler->createResult();
     }
 }
 

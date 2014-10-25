@@ -8,7 +8,6 @@
 namespace Star\Component\Validator;
 
 use Star\Component\Validator\Handler\NotificationHandler;
-use Star\Component\Validator\Message\StringMessage;
 
 /**
  * Class CompositeValidator
@@ -34,20 +33,12 @@ class CompositeValidator implements Validator
 
     /**
      * @param NotificationHandler $handler
-     *
-     * @return ValidationResult
      */
     public function validate(NotificationHandler $handler)
     {
-        $errors = array();
         foreach ($this->validators as $validator) {
-            $result = $validator->validate($handler);
-            foreach ($result->getErrors() as $errorMessages) {
-                $errors[] = new StringMessage($errorMessages);
-            }
+            $validator->validate($handler);
         }
-
-        return new ValidationResult($errors);
     }
 }
  
