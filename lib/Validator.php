@@ -20,8 +20,6 @@ interface Validator
 {
     /**
      * @param NotificationHandler $handler
-     *
-     * @return ValidationResult
      */
     public function validate(NotificationHandler $handler);
 }

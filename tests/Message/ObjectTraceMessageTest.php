@@ -51,7 +51,7 @@ class ObjectTraceMessageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException        \InvalidArgumentException
+     * @expectedException        \Star\Component\Validator\Exception\InvalidArgumentException
      * @expectedExceptionMessage The object argument must be an object.
      */
     public function test_it_should_throw_an_exception_if_the_object_is_of_wrong_type()

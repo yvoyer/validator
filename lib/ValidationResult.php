@@ -7,6 +7,7 @@
 
 namespace Star\Component\Validator;
 
+use Star\Component\Validator\Exception\InvalidArgumentException;
 use Star\Component\Validator\Message\ErrorMessage;
 
 /**
@@ -26,7 +27,7 @@ class ValidationResult
     /**
      * @param ErrorMessage[] $errorMessages
      */
-    public function __construct(array $errorMessages)
+    public function __construct(array $errorMessages = array())
     {
         $this->addErrors($errorMessages);
     }
@@ -34,16 +35,16 @@ class ValidationResult
     /**
      * @param ErrorMessage[] $messages
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function addErrors(array $messages)
     {
         foreach ($messages as $message) {
             if (false === $message instanceof ErrorMessage) {
-                throw new \InvalidArgumentException('Validation result only accepts ErrorMessage instances.');
+                throw new InvalidArgumentException('Validation result only accepts ErrorMessage instances.');
             }
 
-            $this->messages[] = $message;
+            $this->addError($message);
         }
     }
 
@@ -62,10 +63,18 @@ class ValidationResult
     {
         $errors = array();
         foreach ($this->messages as $message) {
-            $errors[] = $message->getString();
+            $errors[] = (string) $message->getString();
         }
 
         return $errors;
+    }
+
+    /**
+     * @param ErrorMessage $message
+     */
+    public function addError(ErrorMessage $message)
+    {
+        $this->messages[] = $message;
     }
 }
  
