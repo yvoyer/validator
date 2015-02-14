@@ -1,7 +1,7 @@
 <?php
 /**
  * This file is part of the validator.local project.
- * 
+ *
  * (c) Yannick Voyer (http://github.com/yvoyer)
  */
 
@@ -32,6 +32,11 @@ class ExceptionNotificationHandlerTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->message = $this->getMock('Star\Component\Validator\Message\ErrorMessage');
+        $this->message
+            ->expects($this->any())
+            ->method('getString')
+            ->will($this->returnValue('message'));
+
         $this->handler = new ExceptionNotificationHandler();
     }
 
@@ -41,11 +46,6 @@ class ExceptionNotificationHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function test_it_should_throw_an_exception_when_a_message_is_available()
     {
-        $this->message
-            ->expects($this->once())
-            ->method('getString')
-            ->will($this->returnValue('message'));
-
         $this->handler->notifyError($this->message);
     }
 
@@ -56,5 +56,14 @@ class ExceptionNotificationHandlerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($result->hasErrors());
         $this->assertCount(0, $result->getErrors());
     }
+
+    /**
+     * @expectedException        \RuntimeException
+     * @expectedExceptionMessage message
+     */
+    public function test_it_should_accept_custom_exceptions()
+    {
+        $this->handler = new ExceptionNotificationHandler('\RuntimeException');
+        $this->handler->notifyError($this->message);
+    }
 }
- 
