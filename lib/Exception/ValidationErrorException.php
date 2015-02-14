@@ -1,7 +1,7 @@
 <?php
 /**
  * This file is part of the validator.local project.
- * 
+ *
  * (c) Yannick Voyer (http://github.com/yvoyer)
  */
 
@@ -16,5 +16,5 @@ namespace Star\Component\Validator\Exception;
  */
 class ValidationErrorException extends \Exception
 {
+    const CLASS_NAME = __CLASS__;
 }
- 

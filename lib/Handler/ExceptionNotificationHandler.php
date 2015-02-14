@@ -1,7 +1,7 @@
 <?php
 /**
  * This file is part of the validator.local project.
- * 
+ *
  * (c) Yannick Voyer (http://github.com/yvoyer)
  */
 
@@ -21,11 +21,28 @@ use Star\Component\Validator\Message\ErrorMessage;
 class ExceptionNotificationHandler implements NotificationHandler
 {
     /**
+     * @var string
+     */
+    private $exceptionClass;
+
+    /**
+     * @param string $exceptionClass Class name that derives from \Exception.
+     */
+    public function __construct($exceptionClass = null)
+    {
+        if (null === $exceptionClass) {
+            $exceptionClass = ValidationErrorException::CLASS_NAME;
+        }
+
+        $this->exceptionClass = $exceptionClass;
+    }
+
+    /**
      * @param ErrorMessage $message
      */
     public function notifyError(ErrorMessage $message)
     {
-        throw new ValidationErrorException($message->getString());
+        throw new $this->exceptionClass($message->getString());
     }
 
     /**
@@ -36,4 +53,3 @@ class ExceptionNotificationHandler implements NotificationHandler
         return new ValidationResult(array());
     }
 }
- 
